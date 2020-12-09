@@ -4,14 +4,15 @@ from colorama import Fore, Back, Style
 import random 
 
 def Tour_Du_Joueur(Mot_A_Trouver):
+    print(Style.RESET_ALL)
     Proposition_Du_Joueur = input("Proposez un mot : ")
-    if(len(Proposition_Du_Joueur)) > 6:
+    if len(Proposition_Du_Joueur)  > 6:
         print("Le mot est trop grand.")
-    if(len(Proposition_Du_Joueur)) < 6 :
+    if len(Proposition_Du_Joueur)  < 6 :
         print("Le mot est trop petit.")
     else:
         for i in range(0,6):
-            if(Proposition_Du_Joueur[i] == Mot_A_Trouver[i]):
+            if Proposition_Du_Joueur[i] == Mot_A_Trouver[i] :
                 print(Back.RED + Proposition_Du_Joueur[i],end="")
             else : 
                 print(Back.BLUE + Proposition_Du_Joueur[i],end="")
@@ -19,9 +20,9 @@ def Tour_Du_Joueur(Mot_A_Trouver):
 
 def Test_Victoire(Proposition_Du_Joueur, Mot_A_Trouver):
         if(Proposition_Du_Joueur == Mot_A_Trouver):
-            Victoire == True
+            Victoire = True
         else :
-            Victoire == False
+            Victoire = False
         return Victoire
         
 def Explication_Motus():
@@ -33,6 +34,26 @@ def Explication_Motus():
         print("Une lettre ne se trouvant pas dans le mot sera indiquée en bleu.\n")
         print("Vous avez 8 tentatives.", end="")
 
+
+
+Liste_De_Mots = ["Cretes", "Campez", "Armure", "Argent", "Lingot", "Tondre", "Manger", "Wagons"]
+Mot_Aleatoire = random.randint(0,9)
+Mot_A_Trouver = Liste_De_Mots[Mot_Aleatoire]
+Nombre_Tentative = 1
+Victoire = False
 Explication_Motus()
-        
+  
+while Nombre_Tentative < 9 and Victoire != True :
+    print(Style.RESET_ALL)
+    print("\nTentative", Nombre_Tentative)
+    Proposition_Du_Joueur = Tour_Du_Joueur(Mot_A_Trouver)
+    
+    Victoire=Test_Victoire(Proposition_Du_Joueur,Mot_A_Trouver)
+    Nombre_Tentative = Nombre_Tentative + 1
+    
+    if Victoire == False :
+        print("\nPerdu")
+    if Victoire == True :
+        print("\nBien joué")
+ 
 input()       
